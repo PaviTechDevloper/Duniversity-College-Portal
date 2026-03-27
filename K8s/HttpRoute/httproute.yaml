@@ -11,12 +11,6 @@ spec:
     - path:
         type: PathPrefix
         value: /
-    filters:
-        - type: URLRewrite
-          urlRewrite:
-            path:
-              type: ReplacePrefixMatch
-              replacePrefixMatch: /
     backendRefs:
     - name: backend-service
       port: 80
