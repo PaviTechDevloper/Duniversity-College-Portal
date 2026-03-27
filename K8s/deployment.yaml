@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duniversity-depoly
+  namespace: duniversity-ns
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: duniversity-app
+  template:
+    metadata:
+      labels:
+        app: duniversity-app
+    spec:
+      containers:
+        - name: dunivesrity-cont
+          image: pavithrasambath2003/duniversity:v1
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: "512Mi"
+              memory: "100m"
+            requests:
+              cpu: "256Mi"
+              memory: "200m"
+
