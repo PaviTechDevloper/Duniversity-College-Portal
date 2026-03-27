@@ -5,8 +5,8 @@ metadata:
   namespace: duniversity-ns
 spec:
   accessModes:
-    - ReadWriteMany   # 🔥 NFS supports multi-node
-  storageClassName: nfs-storage
+    - ReadWriteMany   
+  storageClassName: nfs-storage-v2
   resources:
     requests:
       storage: 5Gi
