@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: duniversity-depoly
+  name: duniversity
   namespace: duniversity-ns
 spec:
   replicas: 2
