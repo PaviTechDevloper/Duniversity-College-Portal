@@ -5,7 +5,7 @@ metadata:
   namespace: duniversity-ns
 spec:
   parentRefs:
-  - name: duniversity-gateway
+  - name: duniversity-gateway 
   rules:
   - matches:
     - path:
