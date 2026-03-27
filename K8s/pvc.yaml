@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  namespace: duniversity-ns
+spec:
+  accessModes:
+    - ReadWriteMany   # 🔥 NFS supports multi-node
+  storageClassName: nfs-storage
+  resources:
+    requests:
+      storage: 5Gi
