@@ -33,7 +33,7 @@ spec:
         envForm:
         - configMapRef:
             name: duniversity-config 
-        - secertRef:
+        - secretRef:
             name: duniversity-secret
 
     
