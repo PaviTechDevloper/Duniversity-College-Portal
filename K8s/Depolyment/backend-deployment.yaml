@@ -6,7 +6,7 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    types: RollingUpdate
+    type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
@@ -17,7 +17,7 @@ spec:
     metadata:
       labels: 
         app: mysql
-    spes:
+    spec:
       containers:
       - name: backend-cont
         image: mariadb
@@ -30,7 +30,7 @@ spec:
           requests:
             memory: "256Mi"
             cpu: "100m"
-        envForm:
+        envFrom:
         - configMapRef:
             name: duniversity-config 
         - secretRef:
