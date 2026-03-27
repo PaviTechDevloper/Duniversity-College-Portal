@@ -21,10 +21,11 @@ spec:
       securityContext:
         fsGroup: 999
       containers:
-      - name: backend-cont
+      - name: mysql-cont   # 🔥 renamed (better clarity)
         image: mariadb
         ports:
         - containerPort: 3306
+
         resources:
           limits:
             memory: "512Mi"
@@ -32,17 +33,38 @@ spec:
           requests:
             memory: "256Mi"
             cpu: "100m"
-        envFrom:
-        - configMapRef:
-            name: duniversity-config 
-        - secretRef:
-            name: duniversity-secret
+
+        # ✅ IMPORTANT: MySQL required env
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+
+        # ❌ REMOVE old envFrom (not needed for DB init)
+        # envFrom:
+        # - configMapRef:
+        #     name: duniversity-config 
+        # - secretRef:
+        #     name: duniversity-secret
+
         volumeMounts:
+        # ✅ DB storage
         - name: mysql-storage
-          mountPath: /var/lib/mysql 
+          mountPath: /var/lib/mysql
+
+        # 🔥 NEW: init SQL script mount
+        - name: init-script
+          mountPath: /docker-entrypoint-initdb.d
+
       volumes:
+      # ✅ PVC (NFS storage)
       - name: mysql-storage
         persistentVolumeClaim:
           claimName: mysql-pvc
 
-    
+      # 🔥 NEW: ConfigMap for SQL
+      - name: init-script
+        configMap:
+          name: mysql-init-script
