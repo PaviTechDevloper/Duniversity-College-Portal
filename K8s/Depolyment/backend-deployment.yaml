@@ -4,6 +4,7 @@ metadata:
   name: mysql-db
   namespace: duniversity-ns
 spec:
+  serviceName: mariadb
   replicas: 3
   minReadySeconds: 10
   strategy:
@@ -40,9 +41,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mysql-secret
-              key: MYSQL_ROOT_PASSWORD
-
-        
+              key: MYSQL_ROOT_PASSWORD     
         # envFrom:
         # - configMapRef:
         #     name: duniversity-config 
@@ -54,21 +53,22 @@ spec:
           mountPath: /var/lib/mysql
         - name: init-script
           mountPath: /docker-entrypoint-initdb.d
-
-      volumeClaimTemplates:
-      - metadata:
-          name: mysql-storage
-        spec:
-          storageClassName: university-storage
-          accessModes: ["ReadWriteMany"]
-          resources:
-            requests:
-              storage: 2Gi
-      
-      # - name: mysql-storage
-      #   persistentVolumeClaim:
-      #     claimName: mysql-pvc
       volumes:
       - name: init-script
         configMap:
           name: mysql-init-script
+
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-storage
+    spec:
+      storageClassName: university-storage
+      accessModes: ["ReadWriteMany"]
+      resources:
+      requests:
+      storage: 2Gi
+      
+      # - name: mysql-storage
+      #   persistentVolumeClaim:
+      #     claimName: mysql-pvc
+      
