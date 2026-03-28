@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mysql-db
   namespace: duniversity-ns
 spec:
-  replicas: 1
+  replicas: 3
+  minReadySeconds: 10
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,10 +19,9 @@ spec:
       labels: 
         app: mysql
     spec:
-      securityContext:
-        fsGroup: 999
+      terminationGracePeriodSeconds: 10
       containers:
-      - name: mysql-cont   # 🔥 renamed (better clarity)
+      - name: mysql-cont   
         image: mariadb
         ports:
         - containerPort: 3306
@@ -34,7 +34,7 @@ spec:
             memory: "256Mi"
             cpu: "100m"
 
-        # ✅ IMPORTANT: MySQL required env
+    
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
@@ -42,7 +42,7 @@ spec:
               name: mysql-secret
               key: MYSQL_ROOT_PASSWORD
 
-        # ❌ REMOVE old envFrom (not needed for DB init)
+        
         # envFrom:
         # - configMapRef:
         #     name: duniversity-config 
@@ -50,21 +50,25 @@ spec:
         #     name: duniversity-secret
 
         volumeMounts:
-        # ✅ DB storage
         - name: mysql-storage
           mountPath: /var/lib/mysql
-
-        # 🔥 NEW: init SQL script mount
         - name: init-script
           mountPath: /docker-entrypoint-initdb.d
 
+      volumeClaimTemplates:
+      - metadata:
+          name: mysql-vct
+        spec:
+          storageClassName: university-storage
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+      
+      # - name: mysql-storage
+      #   persistentVolumeClaim:
+      #     claimName: mysql-pvc
       volumes:
-      # ✅ PVC (NFS storage)
-      - name: mysql-storage
-        persistentVolumeClaim:
-          claimName: mysql-pvc
-
-      # 🔥 NEW: ConfigMap for SQL
       - name: init-script
         configMap:
           name: mysql-init-script
