@@ -28,20 +28,19 @@ spec:
             cpu: "200m"
           requests:
             memory: "256Mi"
-            cpu: "100m"
-
+            cpu: "100m" 
     
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: MYSQL_ROOT_PASSWORD     
-        # envFrom:
-        # - configMapRef:
-        #     name: duniversity-config 
-        # - secretRef:
-        #     name: duniversity-secret
+        # env:
+        # - name: MYSQL_ROOT_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: mysql-secret
+        #       key: MYSQL_ROOT_PASSWORD     
+        envFrom:
+        - configMapRef:
+            name: duniversity-config 
+        - secretRef:
+            name: duniversity-secret
 
         volumeMounts:
         - name: mysql-storage
@@ -62,8 +61,5 @@ spec:
       resources:
         requests:
           storage: 2Gi
-      
-      # - name: mysql-storage
-      #   persistentVolumeClaim:
-      #     claimName: mysql-pvc
-      
+    
+    
