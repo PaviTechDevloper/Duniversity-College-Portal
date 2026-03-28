@@ -4,8 +4,8 @@ metadata:
   name: duniversity-config
   namespace: duniversity-ns
 data:
-  DB_USER: college_user
-  DB_HOST: mariadb
+  DB_USER: "college_user"
+  DB_HOST: "mariadb"
   DB_PORT: "3306"
   GRIEVANCE_DB: grievance_db
   LEAVE_DB: leave_db

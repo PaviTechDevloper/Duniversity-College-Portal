@@ -1,12 +1,10 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: mysql-db
   namespace: duniversity-ns
 spec:
-  serviceName: mariadb
   replicas: 1
-  minReadySeconds: 10
   selector:
     matchLabels:
       app: mysql
@@ -15,7 +13,6 @@ spec:
       labels: 
         app: mysql
     spec:
-      terminationGracePeriodSeconds: 10
       containers:
       - name: mysql-cont   
         image: mariadb
@@ -45,14 +42,6 @@ spec:
         configMap:
           name: mysql-init-script
 
-  volumeClaimTemplates:
-  - metadata:
-      name: mysql-storage
-    spec:
-      storageClassName: university-storage
-      accessModes: ["ReadWriteMany"]
-      resources:
-        requests:
-          storage: 2Gi
+
     
     
