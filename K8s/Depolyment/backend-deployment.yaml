@@ -33,7 +33,7 @@ spec:
           - configMapRef:
               name: duniversity-config 
           - secretRef:
-              name: duniversity-secret
+              name: mysql-secret
 
         volumeMounts:
         - name: mysql-storage

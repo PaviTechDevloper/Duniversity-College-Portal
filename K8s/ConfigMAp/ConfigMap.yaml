@@ -5,7 +5,7 @@ metadata:
   namespace: duniversity-ns
 data:
   DB_USER: "college_user"
-  DB_HOST: "mysql-db-0.mariadb"
+  DB_HOST: "mariadb"
   DB_PORT: "3306"
   GRIEVANCE_DB: grievance_db
   LEAVE_DB: leave_db
