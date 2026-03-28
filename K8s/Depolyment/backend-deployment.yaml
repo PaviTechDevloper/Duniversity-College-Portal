@@ -37,10 +37,10 @@ spec:
         #       name: mysql-secret
         #       key: MYSQL_ROOT_PASSWORD     
         envFrom:
-        - configMapRef:
-            name: duniversity-config 
-        - secretRef:
-            name: duniversity-secret
+          - configMapRef:
+              name: duniversity-config 
+          - secretRef:
+              name: duniversity-secret
 
         volumeMounts:
         - name: mysql-storage
