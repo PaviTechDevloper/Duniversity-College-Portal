@@ -7,11 +7,6 @@ spec:
   serviceName: mariadb
   replicas: 3
   minReadySeconds: 10
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
   selector:
     matchLabels:
       app: mysql
@@ -65,8 +60,8 @@ spec:
       storageClassName: university-storage
       accessModes: ["ReadWriteMany"]
       resources:
-      requests:
-      storage: 2Gi
+        requests:
+          storage: 2Gi
       
       # - name: mysql-storage
       #   persistentVolumeClaim:
