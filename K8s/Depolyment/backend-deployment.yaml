@@ -57,10 +57,10 @@ spec:
 
       volumeClaimTemplates:
       - metadata:
-          name: mysql-vct
+          name: mysql-storage
         spec:
           storageClassName: university-storage
-          accessModes: ["ReadWriteOnce"]
+          accessModes: ["ReadWriteMany"]
           resources:
             requests:
               storage: 2Gi
