@@ -9,3 +9,15 @@ image:
 
 ports:
   containerPort: 3000
+
+backendApp: 
+  name: mysql-db
+
+backendreplicCount: 2
+minReadySeconds: 10
+
+backendimage:
+  repository: mariadb
+
+backendPorts:
+  containerPort: 3306

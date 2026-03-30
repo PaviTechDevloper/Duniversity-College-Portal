@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql-db
+  name: {{ .Values.backendApp.name }}
   namespace: pavi-ns
 spec:
   serviceName: mariadb
-  replicas: 1
-  minReadySeconds: 10
+  replicas: {{ .Values.backendreplicCount }}
+  minReadySeconds: {{ .Values.minReadySeconds }}
   selector:
     matchLabels:
       app: mysql
@@ -18,10 +18,9 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: mysql-cont   
-        image: mariadb
+        image: {{ .Values.backendimage.repository }}
         ports:
-        - containerPort: 3306
-
+        - containerPort: {{ .Values.backendPorts.containerPort }}
         resources:
           limits:
             memory: "512Mi"
