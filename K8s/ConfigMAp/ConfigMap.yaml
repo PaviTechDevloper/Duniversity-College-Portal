@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: duniversity-config
-  namespace: duniversity-ns
+  namespace: pavi-ns
 data:
   DB_USER: "college_user"
   DB_HOST: "mariadb"

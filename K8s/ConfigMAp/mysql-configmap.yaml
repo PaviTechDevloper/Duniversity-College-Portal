@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mysql-init-script
-  namespace: duniversity-ns
+  namespace: pavi-ns
 data:
   init.sql: |
     -- Create databases

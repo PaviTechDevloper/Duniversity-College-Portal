@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-db
-  namespace: duniversity-ns
+  namespace: pavi-ns
 spec:
   replicas: 1
   selector:
