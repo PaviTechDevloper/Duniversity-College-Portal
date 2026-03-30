@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duniversity
+  namespace: pavi-ns
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: duniversity-app
+  template:
+    metadata:
+      labels:
+        app: duniversity-app
+    spec:
+      containers:
+        - name: dunivesrity-cont
+          image: pavithrasambath2003/duniversity:v1
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
+            requests:
+              cpu: "100m"
+              memory: "256Mi"   
+

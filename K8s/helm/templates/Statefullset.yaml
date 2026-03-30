@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-db
+  namespace: pavi-ns
+spec:
+  serviceName: mariadb
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels: 
+        app: mysql
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql-cont   
+        image: mariadb
+        ports:
+        - containerPort: 3306
+
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "200m"
+          requests:
+            memory: "256Mi"
+            cpu: "100m"   
+        envFrom:
+          - configMapRef:
+              name: duniversity-config 
+          - secretRef:
+              name: mysql-secret
+
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
+        - name: init-script
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: init-script
+        configMap:
+          name: mysql-init-script
+
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-storage
+    spec:
+      storageClassName: university-storage
+      accessModes: ["ReadWriteMany"]
+      resources:
+        requests:
+          storage: 2Gi
+    
+    
