@@ -1,7 +1,7 @@
 app:
   name: duniversity
 
-replicaCount: 2
+replicaCount: 1
 
 image: 
   repository: pavithrasambath2003/duniversity
