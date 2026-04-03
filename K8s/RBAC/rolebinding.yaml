@@ -10,7 +10,6 @@ subjects:
 - kind: ServiceAccount
   name: pavithra-ns
   namespace: pavi-ns
-  apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
   name: pavithra-role
