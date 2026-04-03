@@ -6,6 +6,10 @@ subjects:
 - kind: User
   name: raj
   apiGroup: rbac.authorization.k8s.io
+- kind: ServiceAccount
+  name: pavithra-sa
+  namespace: pavi-ns
+  apiGroup: rbac.authorization.k8s.io
 roleRef: 
   kind: ClusterRole
   name: cluster-manager
