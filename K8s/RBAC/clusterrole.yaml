@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: cluster-manager
-rule:
+rules:
 - apiGroups: [""]
   resources: ["nodes", "namespace", "pods"]
   verbs: ["get", "watch", "list"]
