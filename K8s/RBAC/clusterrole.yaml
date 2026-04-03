@@ -1,8 +1,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: Role
 metadata:
   name: cluster-manager
+  namespace: pavi-ns
 rules:
 - apiGroups: [""]
-  resources: ["nodes", "namespace", "pods"]
+  resources: ["pods", "nodes", "namespaces"]
   verbs: ["get", "watch", "list"]
