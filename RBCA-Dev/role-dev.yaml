@@ -4,6 +4,6 @@ metadata:
   name: dev-role
   namespace: pavi-ns
 rules:
-- apiGroups: ["", "apps"]
+- apiGroups: [""]
   resources: ["pods", "deployments"]
   verbs: ["get", "list", "watch"]
