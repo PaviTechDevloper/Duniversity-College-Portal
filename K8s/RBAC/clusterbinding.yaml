@@ -5,7 +5,7 @@ metadata:
 subjects:
 - kind: User
   name: raj
-  apigroup: authorization.k8s.io
+  apigroup: rbac.authorization.k8s.io
 roleRef: 
   kind: ClusterRole
   name: cluster-manager
