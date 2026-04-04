@@ -18,6 +18,15 @@ spec:
       labels:
         app: duniversity-app
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: frontend
+              topologyKey: kubernetes.io/hostname
       containers:
         - name: dunivesrity-cont
           image: pavithrasambath2003/duniversity:v1

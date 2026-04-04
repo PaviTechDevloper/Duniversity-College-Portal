@@ -13,6 +13,18 @@ spec:
       labels: 
         app: mysql
     spec:
+
+      # ✅ NODE AFFINITY (DB should run on specific node)
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: disktype       # ⚠️ change based on your node label
+                operator: In
+                values:
+                - ssd
+
       containers:
       - name: mysql-cont   
         image: mariadb
@@ -26,6 +38,7 @@ spec:
           requests:
             memory: "256Mi"
             cpu: "100m"   
+
         envFrom:
           - configMapRef:
               name: duniversity-config 
@@ -37,6 +50,7 @@ spec:
           mountPath: /var/lib/mysql
         - name: init-script
           mountPath: /docker-entrypoint-initdb.d
+
       volumes:
       - name: mysql-storage
         persistentVolumeClaim:
@@ -44,7 +58,3 @@ spec:
       - name: init-script
         configMap:
           name: mysql-init-script
-
-
-    
-    
