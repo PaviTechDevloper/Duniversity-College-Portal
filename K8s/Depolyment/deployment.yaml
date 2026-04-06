@@ -39,11 +39,11 @@ spec:
           image: pavithrasambath2003/duniversity:v1
           ports:
             - containerPort: 3000
-          # resources:
-          #   limits:
-          #     cpu: "200m"
-          #     memory: "512Mi"
-          #   requests:
-          #     cpu: "100m"
-          #     memory: "256Mi"   
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
+            requests:
+              cpu: "100m"
+              memory: "256Mi"   
 
