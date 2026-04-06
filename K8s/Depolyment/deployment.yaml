@@ -34,6 +34,9 @@ spec:
         operator: "Equal"
         value: "project"
         effect: "NoSchedule"
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - name: dunivesrity-cont
           image: pavithrasambath2003/duniversity:v1
