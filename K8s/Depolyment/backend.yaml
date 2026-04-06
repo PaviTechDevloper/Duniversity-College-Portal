@@ -14,16 +14,16 @@ spec:
         app: mysql
     spec:
 
-      # ✅ NODE AFFINITY (DB should run on specific node)
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: disktype       # ⚠️ change based on your node label
-                operator: In
-                values:
-                - ssd
+      # # ✅ NODE AFFINITY (DB should run on specific node)
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: disktype       # ⚠️ change based on your node label
+      #           operator: In
+      #           values:
+      #           - ssd
 
       containers:
       - name: mysql-cont   
