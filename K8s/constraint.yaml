@@ -3,7 +3,9 @@ kind: K8sBlockLatest
 metadata:
   name: block-latest
 spec:
+  enforcementAction: deny   # 🔥 IMPORTANT
   match:
+    namespaces: ["pavi-ns"] 
     kinds:
       - apiGroups: [""]
         kinds: ["Pod"]
