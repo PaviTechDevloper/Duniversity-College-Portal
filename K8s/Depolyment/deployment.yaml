@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: duniversity
   namespace: pavi-ns
+  labels:                     # 🔥 ADD THIS
+    app: duniversity-app
 spec:
   replicas: 3
   strategy:
