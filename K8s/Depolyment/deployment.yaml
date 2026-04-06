@@ -18,15 +18,20 @@ spec:
       labels:
         app: duniversity-app
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app: frontend
-              topologyKey: kubernetes.io/hostname
+      # affinity:
+      #   podAntiAffinity:
+      #     preferredDuringSchedulingIgnoredDuringExecution:
+      #     - weight: 100
+      #       podAffinityTerm:
+      #         labelSelector:
+      #           matchLabels:
+      #             app: frontend
+      #         topologyKey: kubernetes.io/hostname
+      toleration:
+      - key: "key1"
+        operator: "Equal"
+        value: "project"
+        effect: "NoSchedule"
       containers:
         - name: dunivesrity-cont
           image: pavithrasambath2003/duniversity:v1
