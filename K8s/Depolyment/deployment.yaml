@@ -27,7 +27,7 @@ spec:
       #           matchLabels:
       #             app: frontend
       #         topologyKey: kubernetes.io/hostname
-      toleration:
+      tolerations:
       - key: "key1"
         operator: "Equal"
         value: "project"
