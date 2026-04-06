@@ -34,7 +34,7 @@ spec:
         effect: "NoSchedule"
       containers:
         - name: dunivesrity-cont
-          image: pavithrasambath2003/duniversity:latest
+          image: pavithrasambath2003/duniversity:v1
           ports:
             - containerPort: 3000
           resources:
