@@ -2,4 +2,4 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: admin-user
-  namespace: pavi-ns
+  namespace: kubernetes-dashboard
